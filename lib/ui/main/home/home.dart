@@ -15,7 +15,7 @@ class _ScanPointAppState extends State<ScanPointApp> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Login(),
+      home: BottomTabApp(),
       debugShowCheckedModeBanner: false,
     );
   }
