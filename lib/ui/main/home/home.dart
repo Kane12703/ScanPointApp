@@ -1,72 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scan_point_app/ui/auth/login.dart';
-import 'package:scan_point_app/ui/main/history/history.dart';
-import 'package:scan_point_app/ui/main/notification/notification.dart';
-import 'package:scan_point_app/ui/main/profile/profile.dart';
-
-class ScanPointApp extends StatefulWidget {
-  const ScanPointApp({super.key});
-
-  @override
-  State<ScanPointApp> createState() => _ScanPointAppState();
-}
-
-class _ScanPointAppState extends State<ScanPointApp> {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: BottomTabApp(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class BottomTabApp extends StatefulWidget {
-  const BottomTabApp({super.key});
-
-  @override
-  State<BottomTabApp> createState() => _BottomTabAppState();
-}
-
-class _BottomTabAppState extends State<BottomTabApp> {
-  int _selectedIndex = 0;
-  final List<Widget> _tabs = [
-    const HomeTab(),
-    const HisoryTab(),
-    const NotificationTab(),
-    const ProfileTab(),
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _tabs[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Fixed
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        onTap: (int newIndex) {
-          setState(() {
-            _selectedIndex = newIndex;
-          });
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
-            label: '',
-            backgroundColor: Colors.orange,
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'Notification'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Profile'),
-        ],
-      ),
-    );
-  }
-}
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -78,6 +10,59 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('home'));
+    return Scaffold(
+      body: ListView.builder(
+        padding: const EdgeInsets.only(top: 50),
+        itemCount: drinks.length,
+        itemBuilder: (context, index) {
+          final drink = drinks[index];
+          return ListTile(
+            leading: Image.network(
+              drink.image,
+              height: 80,
+              width: 80,
+            ),
+            title: Text(drink.name),
+          );
+        },
+      ),
+    );
   }
 }
+
+class Drink {
+  int id;
+  String name;
+  String image;
+  Drink(this.id, this.name, this.image);
+}
+
+List<Drink> drinks = [
+  Drink(1, "Lisinopril", "http://dummyimage.com/130x100.png/dddddd/000000"),
+  Drink(2, "Atenolol and Chlorthalidone",
+      "http://dummyimage.com/218x100.png/dddddd/000000"),
+  Drink(3, "Thiothixene", "http://dummyimage.com/234x100.png/ff4444/ffffff"),
+  Drink(
+      4, "Dextromethorphan", "http://dummyimage.com/198x100.png/ff4444/ffffff"),
+  Drink(5, "Octinoxate", "http://dummyimage.com/148x100.png/ff4444/ffffff"),
+  Drink(6, "Acarbose", "http://dummyimage.com/111x100.png/cc0000/ffffff"),
+  Drink(7, "Zidovudine", "http://dummyimage.com/153x100.png/ff4444/ffffff"),
+  Drink(8, "Risperidone", "http://dummyimage.com/164x100.png/cc0000/ffffff"),
+  Drink(9, "Promethazine", "http://dummyimage.com/111x100.png/cc0000/ffffff"),
+  Drink(10, "Quetiapine fumarate",
+      "http://dummyimage.com/247x100.png/ff4444/ffffff"),
+  Drink(11, "dextromethorphan",
+      "http://dummyimage.com/209x100.png/ff4444/ffffff"),
+  Drink(12, "GUAIFENESIN", "http://dummyimage.com/199x100.png/dddddd/000000"),
+  Drink(
+      13, "SALICYLIC ACID", "http://dummyimage.com/179x100.png/dddddd/000000"),
+  Drink(14, "simvastatin", "http://dummyimage.com/173x100.png/5fa2dd/ffffff"),
+  Drink(15, "Meclizine HCl", "http://dummyimage.com/142x100.png/ff4444/ffffff"),
+  Drink(16, "Pepper Tree Pollen",
+      "http://dummyimage.com/236x100.png/ff4444/ffffff"),
+  Drink(17, "Menthol", "http://dummyimage.com/143x100.png/ff4444/ffffff"),
+  Drink(
+      18, "Acetaminophen,", "http://dummyimage.com/157x100.png/5fa2dd/ffffff"),
+  Drink(19, "Acetaminophen", "http://dummyimage.com/134x100.png/dddddd/000000"),
+  Drink(20, "Allscale", "http://dummyimage.com/134x100.png/cc0000/ffffff"),
+];
